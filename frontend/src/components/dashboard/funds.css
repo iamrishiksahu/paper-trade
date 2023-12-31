@@ -1,0 +1,31 @@
+.funds_type_item_container{
+    background-color: white;
+    padding: 1rem;
+    width: 20vw;
+    
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.funds_type_item_container:hover {
+    background-color: #fbfbfb;
+}
+
+
+.button_container{ 
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.funds_breakup_amt {
+    font-weight: 600;
+    color: var(--mui-palette-blue-500);
+    
+}

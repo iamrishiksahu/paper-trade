@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap');
+
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: #fff;
+  padding: 2px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #fff;
+  padding: 2px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border-radius: 10px;
+  padding: 2px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #efefef;
+}
+
+:root {
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  /* 
+    0.25 rem = 4px
+    0.50 rem = 8px
+    0.75 rem = 12px
+    1.00 rem = 16px
+    1.25 rem = 20px 
+    1.50 rem = 24px
+    1.75 rem = 28px
+    2.00 rem = 32px
+    3.00 rem = 48px
+    4.00 rem = 64px
+  
+  */
+
+}
+
+@media screen and (max-width: 992px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
+
+#widget-container{
+  border: none;
+}
+
+.App {
+  text-align: center;
+}
+
+.dark-theme {
+
+  --button-red-color: white;
+  --button-text-coolor: black;
+}
+
+.light-theme {
+  --button-red-color: red;
+  --button-text-coolor: white;
+}
+
+.base-css {
+  margin-top: 20px;
+  margin-bottom: 500px;
+  margin: auto;
+
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
