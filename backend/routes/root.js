@@ -26,6 +26,7 @@ const rootRouter = (app) => {
 
     app.use('/user', verifyJWT); //verify the request only then move to the next route
     app.use('/user', require('./user'));
+    app.use('/market', require('./market'));
 
     
 
