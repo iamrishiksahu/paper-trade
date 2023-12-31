@@ -44,7 +44,7 @@ const Dashboard = (props) => {
       }}>
 
         <div style={{
-          width: '30vw',
+          width: '25vw',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
@@ -71,8 +71,8 @@ const Dashboard = (props) => {
         </div>
 
         <div className="dashboard_frame_main" style={{
-          marginLeft: '30vw',
-          width: '70vw',
+          marginLeft: '25vw',
+          width: '75vw',
         }}>
           <DashboardFrame />
 

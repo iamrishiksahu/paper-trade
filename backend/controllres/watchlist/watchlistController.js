@@ -29,7 +29,7 @@ const getWatchlist = async (req, res) => {
 const addWatchlistItem = async (req, res) => {
 
     const email = req.email;
-    const data = req.body.payload;
+    const data = req.body;
 
     if (!email) {
         return res.status(401).json({ message: 'UNAUTHORIZED', msg: 'email not present in the request' });

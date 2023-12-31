@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setWatchlist, addNewWatchListItem } from '../../features/watchlist/watchlistState'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import WatchListItem from './watchlist/WatchListItem'
-import SearchIcon from '@mui/icons-material/Search';
 
 import fyers from 'fyers-api-v2'
+import WatchlistSearchBar from './watchlist/WatchlistSearchBar'
 
 const listOfStocks = [
     {
@@ -267,14 +267,14 @@ const Watchlist = (props) => {
 
     }
 
-    const deleteWatchlistItem = async ({data}) => {
-        try{
+    const deleteWatchlistItem = async ({ data }) => {
+        try {
             // const response = await axios.delete('/user/watchlist', {
 
             // })
-            dispatch(deleteWatchlistItem({item: data}))
+            dispatch(deleteWatchlistItem({ item: data }))
 
-        } catch(err){
+        } catch (err) {
             console.error(err)
         }
     }
@@ -284,6 +284,7 @@ const Watchlist = (props) => {
         setIsHovering(prev => !prev);
     }
 
+
     useEffect(() => {
 
         fetchWatchlist();
@@ -291,7 +292,7 @@ const Watchlist = (props) => {
 
 
 
-    const addWatchListItem = async () =>{
+    const addWatchListItem = async () => {
 
 
 
@@ -306,7 +307,7 @@ const Watchlist = (props) => {
             payload
         });
 
-        if(data.status === 201){
+        if (data.status === 201) {
             dispatch(addNewWatchListItem(payload));
         }
 
@@ -320,36 +321,30 @@ const Watchlist = (props) => {
             <Box sx={{ padding: 0 }} >
 
 
-
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem', paddingY: '0.25rem' }} >
-                    <SearchIcon color='grey' sx={{ maxWidth: '1rem', paddingLeft: '0.75rem' }} />
-                    <InputBase
-
-                        placeholder='Search BSE stocks here!' />
-                </Box>
+                <WatchlistSearchBar />
 
                 <Divider />
 
 
-                <Box  >
+                <Box sx={{ height: '100%' }}>
                     {
 
                         watchlistData.length != 0 ? watchlistData.map((stock, idx) => (
-                            <WatchListItem deleteItem={deleteWatchlistItem} stock={stock} idx={idx} />
+                            <WatchListItem key={idx} deleteItem={deleteWatchlistItem} stock={stock} idx={idx} />
                         )) : <Typography sx={{ paddingY: '4rem' }} align='center'>Add items to watchlist!</Typography>
                     }
-                    <Divider color='#e4e4e4' />
+                    {/* <Divider color='#e4e4e4' /> */}
 
 
                 </Box>
 
-               
+
                 {/* <Button onClick={addWatchListItem} >Test</Button> {/*  */}
-                {/* <Button onClick={abc} >getQuotes</Button> */} */}
+                {/* <Button onClick={abc} >getQuotes</Button> */}
 
 
-                
-     
+
+
 
             </Box>
 
