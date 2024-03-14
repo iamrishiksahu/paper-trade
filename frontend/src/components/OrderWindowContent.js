@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Box, Container, Typography, TextField, Button, Dialog, DialogActions } from '@mui/material'
 import { useState } from 'react'
 import { styled } from '@mui/system'
@@ -15,8 +15,10 @@ const OrderWindowContent = (props) => {
     const axios = useAxiosPrivate();
     const dispatch = useDispatch();
 
-    const [orderQty, setOrderQty] = useState(1);
-    const [orderPrice, setOrderPrice] = useState(data.ltp);
+    const [orderPrice, setOrderPrice] = useState(data.ltp)
+    const [orderQty, setOrderQty] = useState(1)
+
+
 
     const FlexBox = styled(Box)(({ theme }) => ({
         display: 'flex',
@@ -33,6 +35,7 @@ const OrderWindowContent = (props) => {
 
     const placeOrderAction = async () => {
 
+
         let b;
 
         try {
@@ -48,25 +51,29 @@ const OrderWindowContent = (props) => {
 
             })
 
-            if(b.status === 201){
+            if (b.status === 201) {
                 dispatch(addNewOrder(b.data.data.orders[b.data.data.orders.length - 1]));
                 window.location.reload()
                 dispatch(toggleOrderWindowOpen)
                 // dispatch(addNewPosition(b.data.data.orders[b.data.data.orders.length - 1]));
-            }else{
+            } else {
                 console.log("orderCreation: ", b);
             }
         } catch (err) {
 
-            if(err.response.status === 402){
+            if (err.response.status === 402) {
                 // INSUFFICIENT FUNDS
                 alert(JSON.stringify(err.response.data))
-            }else{
+            } else {
 
                 console.error(err);
             }
         }
     }
+
+    useEffect(() => {
+
+    }, [orderQty, orderPrice])
 
     return (
         <Container disableGutters sx={{ width: '25rem', background: '#ffffff', borderRadius: '0.25rem', boxShadow: '0 0 2rem rgba(0,0,0,0.08)', overflow: 'hidden' }}>
@@ -87,19 +94,20 @@ const OrderWindowContent = (props) => {
                     // autoFocus='autofocus'// to prevent focus losing onChange
                     type='number'
                     size='small'
-                    value={orderQty}
-                    onChange={(e) => setOrderQty(e.target.value)}
+                    onChange={(e) => setOrderQty(e.current.value)}
+                    defaultValue={1}
                 />
                 <TextField
-                
+
                     required
                     id="order-price"
                     label="Price"
+                    // value={orderPrice}
                     // autoFocus='autoFocus' // to prevent focus losing onChange
-                    onChange={(e) => setOrderPrice(e.target.value)}
-                    value={orderPrice}
-                    type='number'
-                    size='small'
+                    onChange={(e) => setOrderPrice(e.current.value)}
+                defaultValue={data.ltp}
+                type='number'
+                size='small'
                 />
 
             </FlexBox>
@@ -108,7 +116,7 @@ const OrderWindowContent = (props) => {
 
                 <Box sx={{ gap: '0.25rem' }}>
                     <Typography variant='span' sx={{ color: 'black.text' }}>Margin </Typography>
-                    <Typography variant='span' sx={{ color: 'blue.main' }}>₹{Math.round((orderQty * orderPrice) * 100) / 100}</Typography>
+                    <Typography variant='span' sx={{ color: 'blue.main' }}>₹{Math.round((orderQty* orderPrice) * 100) / 100}</Typography>
                 </Box>
 
                 <Button onClick={placeOrderAction} variant='contained' size='small' sx={{ height: '2rem', backgroundColor: colorTheme }}>{data.transactionType}</Button>
