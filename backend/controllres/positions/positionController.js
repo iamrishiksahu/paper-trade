@@ -93,4 +93,53 @@ const createNewOrder = async (req, res) => {
 
 }
 
-module.exports = { getAllPositions }
+const updateSinglePositions = async (req, res) => {
+
+    
+    const email = req.email;
+
+    if (!email) {
+        return res.status(400).json({ message: 'BAD_REQUEST', msg: 'email not present in the request' });
+    }
+
+    try{
+
+    
+    
+    const positionsAccount = await Positions.findOne({ email: email }).exec();
+
+    if (!positionsAccount) {
+        return res.status(201).json({ message: 'NO_POSITIONS_ACCOUNT_FOUND' });
+    }
+
+    const positionsList = positionsAccount.positions;
+
+    if (!positionsList) {
+        return res.status(201).json({ message: 'NO_POSITIONS_FOUND' });
+    }
+
+
+    const itemIdx = positionsList.findIndex(item => item.scriptName ==  req.body.scriptName);
+    positionsList[itemIdx].qty = req.body.qty
+    positionsList[itemIdx].ltp = req.body.ltp
+
+    positionsAccount.positions = positionsList
+
+
+    await positionsAccount.save()
+
+    res.status(201).json({data: 'Successfully Updated!'})
+
+
+
+}catch(err){
+    console.log(err)
+    res.status(500).json({err})
+}
+    
+
+
+
+}
+
+module.exports = { getAllPositions, updateSinglePositions }

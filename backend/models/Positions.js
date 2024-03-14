@@ -12,6 +12,7 @@ const positionsAccount = mongoose.Schema({
 
         scriptName: String,
         avgCost: Number,
+        ltp: Number,
         purchasedAt: Date,
         soldAt: Date,
         qty: Number

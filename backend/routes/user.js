@@ -6,7 +6,7 @@ const {getFunds, updateFunds} = require('../controllres/account/fundsController'
 const { getAllOrders, createNewOrder
     // , deleteOrder
 } = require('../controllres/orders/ordersController');
-const { getAllPositions } = require('../controllres/positions/positionController');
+const { getAllPositions, updateSinglePositions } = require('../controllres/positions/positionController');
 const { getWatchlist, addWatchlistItem } = require('../controllres/watchlist/watchlistController');
 
 router.get('/accountinfo', getAccountInfo);
@@ -22,6 +22,7 @@ router.post('/orders', createNewOrder )
 // router.delete('/orders', deleteOrder)
 
 router.get('/positions', getAllPositions)
+router.put('/positions', updateSinglePositions)
 
 router.get('/watchlist', getWatchlist)
 router.post('/watchlist', addWatchlistItem)

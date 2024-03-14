@@ -6,6 +6,7 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { useDispatch } from 'react-redux'
 import { setOrders, addNewOrder } from '../features/orders/orderState'
 import { addNewPosition } from '../features/positions/positionsState'
+import { toggleOrderWindowOpen } from '../features/orderWindowState'
 
 const OrderWindowContent = (props) => {
 
@@ -49,12 +50,21 @@ const OrderWindowContent = (props) => {
 
             if(b.status === 201){
                 dispatch(addNewOrder(b.data.data.orders[b.data.data.orders.length - 1]));
-                dispatch(addNewPosition(b.data.data.orders[b.data.data.orders.length - 1]));
+                window.location.reload()
+                dispatch(toggleOrderWindowOpen)
+                // dispatch(addNewPosition(b.data.data.orders[b.data.data.orders.length - 1]));
             }else{
                 console.log("orderCreation: ", b);
             }
         } catch (err) {
-            console.error(err);
+
+            if(err.response.status === 402){
+                // INSUFFICIENT FUNDS
+                alert(JSON.stringify(err.response.data))
+            }else{
+
+                console.error(err);
+            }
         }
     }
 
