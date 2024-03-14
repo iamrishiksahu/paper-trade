@@ -45,9 +45,9 @@ const useRefreshToken = () => {
         }).catch((err) => {
             console.log("error response recieved: " + err);
         })
+        // return res.data.accessToken;
 
 
-        return res.data.accessToken;
 
     }
     return refresh;

@@ -37,7 +37,7 @@ const logRequest = (req, res, next) => {
     const method = req.method
     const origin = req.headers.origin
 
-    logEvent(`origin: ${origin}\t${method}\t${url}`, 'requestsLog.log')
+    logEvent(`origin: ${origin}\t method: ${method}\t endpoint: ${url}`, 'requestsLog.log')
 
 
     next();

@@ -195,9 +195,7 @@ const listOfStocks = [
     },
 ]
 
-
 const Watchlist = (props) => {
-
 
     const [isHovering, setIsHovering] = useState(false);
     const dispatch = useDispatch();
@@ -237,7 +235,6 @@ const Watchlist = (props) => {
         console.log(result)
     }
 
-
     const abc = async () => {
         const reqBody = {
             symbol: ['NSE:ONGC-EQ', 'NSE:IOC-EQ'],
@@ -254,13 +251,12 @@ const Watchlist = (props) => {
         })
     }
 
-
-
-
     const fetchWatchlist = async () => {
         try {
             const response = await axios.get('/user/watchlist');
+            console.log(response.data.watchlist)
             dispatch(setWatchlist(response.data.watchlist))
+            dispatch(setWatchlist([ ...watchlistData, ...response.data.watchlist]))
         } catch (err) {
             console.error(err);
         }

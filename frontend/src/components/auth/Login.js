@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react'
 import './Login.css'
 import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { Typography, Container, TextField, Box, Button, Checkbox, LinearProgress } from '@mui/material';
-import { axiosInstance as axios } from '../../api/axiosConfig';
+import { axiosInstance as axiosp } from '../../api/axiosConfig';
+import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import { useEffect } from 'react';
 import { setAuthData } from '../../features/auth/authState';
@@ -33,11 +34,14 @@ const LoginComponent = () => {
     const authData = useSelector((state) => state.authData);
 
 
-
-
-    const togglePersist = () => {
-        setPersist(prev => !prev);
+    const togglePersist = (e) => {
+        if(e.target.checked){
+            setPersist(true);
+        }else{
+            setPersist(false)
+        }
     }
+
 
     useEffect(() => {
         console.log('authData: ', authData)
@@ -93,7 +97,7 @@ const LoginComponent = () => {
         // });
 
 
-        axios.post('/auth/login', {
+        axios.post('http://localhost:4000/auth/login', {
             email: emailVal,
             password: passwordVal
         },
@@ -210,7 +214,7 @@ const LoginComponent = () => {
 
                     <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center', marginBottom: '1rem' }}>
 
-                        <Checkbox onChange={togglePersist} size='small' sx={{ maxWidth: '10px', marginRight: '0.25rem' }} />
+                        <Checkbox defaultChecked={persist} onChange={togglePersist} size='small' sx={{ maxWidth: '10px', marginRight: '0.25rem' }} />
                         <Typography sx={{ fontSize: '0.75rem' }}>Remember me on this device</Typography>
                     </Box>
 
