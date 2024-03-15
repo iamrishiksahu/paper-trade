@@ -1,8 +1,8 @@
 {
-    "version": 2,
+    "version": 3,
     "builds": [
       {
-        "src": "./server.js",
+        "src": "server.js",
         "use": "@now/node"
       }
     ],
