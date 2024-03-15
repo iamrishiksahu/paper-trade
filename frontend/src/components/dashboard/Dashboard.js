@@ -36,6 +36,7 @@ const Dashboard = (props) => {
         display: 'flex',
         flexDirection: 'row',
         overflowY: 'hidden',
+        // marginTop: '1rem',
         marginLeft: '2rem',
         marginRight: '2rem',
         boxSizing: 'border-box', 

@@ -252,17 +252,17 @@ const Positions = () => {
       <FlexBox sx={{ flex: 1, justifyContent: 'space-between ' }}>
         <Box>
           <Typography sx={{ color: 'grey.text' }}>Total investment</Typography>
-          <Typography variant='h5'>{totals.invested}</Typography>
+          <Typography variant='h5'>{Math.round(totals.invested*100)/100}</Typography>
         </Box>
         <Box>
           <Typography sx={{ color: 'grey.text' }}>Crruent value</Typography>
-          <Typography variant='h5' sx={{}}>{totals.value}</Typography>
+          <Typography variant='h5' sx={{}}>{Math.round(totals.value*100)/100}</Typography>
         </Box>
         <Box>
 
           <Typography sx={{ color: 'grey.text' }}>Total P&L</Typography>
 
-          <Typography variant='h5' sx={{ color: totals.pnl < 0 ? 'red.main' : 'green.main' }}>{totals.pnl}</Typography>
+          <Typography variant='h5' sx={{ color: totals.pnl < 0 ? 'red.main' : 'green.main' }}>{Math.round(totals.pnl*100)/100}</Typography>
 
         </Box>
 

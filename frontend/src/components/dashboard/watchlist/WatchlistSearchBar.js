@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Autocomplete, TextField, selectClasses } from '@mui/material'
+import { Box, Autocomplete, TextField, selectClasses, InputBase } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { setWatchlist, addNewWatchListItem } from '../../../features/watchlist/watchlistState';
@@ -16,7 +16,7 @@ const WatchlistSearchBar = () => {
 
         const selected = e.target.textContent
 
-        if(selected.length == 0) return
+        if (selected.length == 0) return
 
         // Add this to the watchlist
 
@@ -30,7 +30,7 @@ const WatchlistSearchBar = () => {
             dispatch(setWatchlist(response.data.data.watchlist))
         } catch (err) {
             console.error(err);
-        }finally{
+        } finally {
             e.target.value = null
         }
 
@@ -69,25 +69,38 @@ const WatchlistSearchBar = () => {
     return (
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem', paddingY: '0.25rem' }} >
-            <SearchIcon color='grey' sx={{ maxWidth: '1rem', paddingLeft: '0.75rem' }} />
 
+            <SearchIcon color='grey' sx={{ maxWidth: '1rem', paddingLeft: '0.75rem' }} />
             <Autocomplete
                 disablePortal
                 id="combo-box-demo"
                 onChange={handleAutoCompleteChange}
                 options={suggestions}
                 sx={{ width: '100%' }}
-                renderInput={(params) => <TextField {...params} size='small' onChange={(e) => {
-                    const value = e.target.value
-                    if (value.length >= 3) {
-                        getSuggestions(value)
-                    } else {
-                        setSuggestions([])
-                    }
+
+                renderInput={(params) => (<InputBase
+                    style={{
+                        width: '100%',
+                        border: 'none',
+                        outline: 'none',
+                        padding: '0.5rem 0'
+                    }}
+                    // onChange={(e) => {
+                    //     const value = e.target.value
+                    //     if (value.length >= 3) {
+                    //         getSuggestions(value)
+                    //     } else {
+                    //         setSuggestions([])
+                    //     }
+                    // }}
 
 
-                }} placeholder='Search BSE stocks here!' />}
+                    placeholder='Search BSE stocks here eg: RELIANCE,'
+                />)}
             />
+
+
+
 
             {/* <InputBase fullWidth placeholder='Search BSE stocks here!' /> */}
         </Box>

@@ -221,7 +221,8 @@ function Navbar() {
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.main,
-    boxShadow: '8px 0px 10px rgba(0,0,0,0.10)',
+    boxShadow: '0 1px 5px 0 rgba(0,0,0,0.1)',
+    // borderBottom: '1px solid #cbcbcb',
     zIndex: '10000'
 }))
 

@@ -10,6 +10,7 @@ import { toggleOrderWindowOpen } from '../features/orderWindowState'
 
 const OrderWindowContent = (props) => {
 
+    let typingTimer;
 
     const data = props.data;
     const axios = useAxiosPrivate();
@@ -42,7 +43,7 @@ const OrderWindowContent = (props) => {
             b = await axios.post('/user/orders', {
                 payload: {
                     scriptName: data.scriptName,
-                    qty: orderQty,
+                    qty: data.transactionType == 'BUY' ? orderQty : -orderQty,
                     avgCost: orderPrice,
                     orderStatus: 'ACTIVE',
                     transactionType: data.transactionType,
@@ -71,10 +72,6 @@ const OrderWindowContent = (props) => {
         }
     }
 
-    useEffect(() => {
-
-    }, [orderQty, orderPrice])
-
     return (
         <Container disableGutters sx={{ width: '25rem', background: '#ffffff', borderRadius: '0.25rem', boxShadow: '0 0 2rem rgba(0,0,0,0.08)', overflow: 'hidden' }}>
 
@@ -94,20 +91,36 @@ const OrderWindowContent = (props) => {
                     // autoFocus='autofocus'// to prevent focus losing onChange
                     type='number'
                     size='small'
-                    onChange={(e) => setOrderQty(e.current.value)}
-                    defaultValue={1}
+                    onKeyDown={() => {
+                        window.clearTimeout(typingTimer)
+                    }}
+                    onKeyUp={(e) => {
+                        window.clearTimeout(typingTimer)
+                        typingTimer = window.setTimeout(() => {
+                            setOrderQty(e.target.value)
+                        }, 300)
+                    }}
+
+                    defaultValue={orderQty}
                 />
                 <TextField
 
                     required
                     id="order-price"
                     label="Price"
-                    // value={orderPrice}
-                    // autoFocus='autoFocus' // to prevent focus losing onChange
-                    onChange={(e) => setOrderPrice(e.current.value)}
-                defaultValue={data.ltp}
-                type='number'
-                size='small'
+                    onKeyDown={() => {
+                        window.clearTimeout(typingTimer)
+                    }}
+                    onKeyUp={(e) => {
+                        window.clearTimeout(typingTimer)
+                        typingTimer = window.setTimeout(() => {
+                            setOrderPrice(e.target.value)
+                        }, 300)
+                    }}
+
+                    defaultValue={orderPrice}
+                    type='number'
+                    size='small'
                 />
 
             </FlexBox>
@@ -116,7 +129,7 @@ const OrderWindowContent = (props) => {
 
                 <Box sx={{ gap: '0.25rem' }}>
                     <Typography variant='span' sx={{ color: 'black.text' }}>Margin </Typography>
-                    <Typography variant='span' sx={{ color: 'blue.main' }}>₹{Math.round((orderQty* orderPrice) * 100) / 100}</Typography>
+                    <Typography variant='span' sx={{ color: 'blue.main' }}>₹{Math.round((orderQty * orderPrice) * 100) / 100}</Typography>
                 </Box>
 
                 <Button onClick={placeOrderAction} variant='contained' size='small' sx={{ height: '2rem', backgroundColor: colorTheme }}>{data.transactionType}</Button>

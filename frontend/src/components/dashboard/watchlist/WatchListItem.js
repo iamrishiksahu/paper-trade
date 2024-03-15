@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Typography, Divider, IconButton, Button, Box } from '@mui/material'
 import { AddBoxOutlined, IndeterminateCheckBoxOutlined, InsertChart, DeleteTwoTone } from '@mui/icons-material'
 import { useEffect } from 'react'
-import './watchListItem.css'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { scriptChange } from '../../../features/overview/chartFeatures'
@@ -77,7 +76,7 @@ const WatchListItem = (props) => {
             >
 
 
-            <Box sx={{ paddingY: '0.5rem', fontSize: '16px', paddingX: '1rem', display: 'flex', justifyContent: 'space-between' }} >
+            <Box sx={{ paddingY: '0.5rem', fontSize: '16px', paddingX: '1rem', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--color-border-1)' }} >
 
                 <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
 
@@ -91,11 +90,6 @@ const WatchListItem = (props) => {
                 }
 
             </Box>
-
-
-
-
-            <Divider />
 
 
         </div>

@@ -42,8 +42,8 @@ const createNewOrder = async (req, res) => {
 
     const requiredMargin = data.avgCost * data.qty
     const available_funds = fundsAccount?.fundsInfo?.available_funds
-    if(requiredMargin > fundsAccount?.fundsInfo?.available_funds){
-        return res.status(402).json({message: 'INSUFFICIENT_FUNDS', available_funds: available_funds, required_margin: requiredMargin })
+    if (requiredMargin > fundsAccount?.fundsInfo?.available_funds) {
+        return res.status(402).json({ message: 'INSUFFICIENT_FUNDS', available_funds: available_funds, required_margin: requiredMargin })
     }
 
     const orderAccount = await Orders.findOne({ email: email }).exec();
@@ -73,32 +73,45 @@ const createNewOrder = async (req, res) => {
 
     const idx = positionAccount.positions.findIndex(item => item.scriptName == data.scriptName)
 
-    if(idx == -1){
-            const newPosition = {
-                scriptName: data.scriptName,
-                qty: data.qty,
-                avgCost: data.avgCost,
-                purchasedAt: Date.now(),
-                ltp: data.avgCost,
-                soldAt: null,
-            }
-        
-            positionAccount.positions.push(newPosition)
-    }else{
+    if (idx == -1) {
+        const newPosition = {
+            scriptName: data.scriptName,
+            qty: data.qty,
+            avgCost: data.avgCost,
+            purchasedAt: Date.now(),
+            ltp: data.avgCost,
+            soldAt: null,
+        }
+
+        positionAccount.positions.push(newPosition)
+    } else {
         const position = positionAccount.positions[idx]
-        position.avgCost = Math.round((position.avgCost*position.qty + data.avgCost*data.qty) *100 / (position.qty + data.qty))/100
-        position.qty += data.qty
-        positionAccount.positions[idx] = position
+        const qty = parseInt(data.qty)
+        const avg = parseFloat(data.avgCost)
+        // average the price if purchased
+        if (data.transactionType == 'BUY'){
+            position.avgCost = Math.round((position.avgCost * position.qty + avg * qty) * 100 / (position.qty + qty)) / 100
+        }
+
+        position.qty += qty
+        if(position.qty == 0){
+            // delete the position
+            positionAccount.positions.splice(idx, 1)
+
+        }else{
+            positionAccount.positions[idx] = position
+        }
     }
 
     // deducting funds
+
     fundsAccount.fundsInfo.available_funds -= requiredMargin
 
     try {
         await fundsAccount.save();
         await positionAccount.save();
-        
-        orderAccount.orders.push({...newOrder, orderStatus: 'COMPLETED'})
+
+        orderAccount.orders.push({ ...newOrder, orderStatus: 'COMPLETED' })
 
     } catch (err) {
         console.error(err)

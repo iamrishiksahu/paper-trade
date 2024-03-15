@@ -26,8 +26,119 @@
 }
 
 :root {
-  font-size: 16px;
-  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: var(--color-text-default);
+
+  --color-solid-white: #fff;
+  --color-solid-white--rgb: 255, 255, 255;
+  --color-seashell-white: #f1f1f1;
+  --color-seashell-white--rgb: 241, 241, 241;
+  --color-solid-amber: #ff8f00;
+  --color-solid-amber--rgb: 255, 143, 0;
+  --color-caranation-red: #df514c;
+  --color-caranation-red--rgb: 223, 81, 76;
+  --color-solid-orange: #ff5722;
+  --color-solid-orange--rgb: 255, 87, 34;
+  --color-pomegranate-red: #ff5722;
+  --color-pomegranate-red--rgb: 255, 87, 34;
+  --color-french-rose: #ec407a;
+  --color-french-rose--rgb: 236, 64, 122;
+  --color-dodger-aqua: #00b0ff;
+  --color-dodger-aqua--rgb: 0, 176, 255;
+  --color-havelock-blue: #4184f3;
+  --color-havelock-blue--rgb: 65, 132, 243;
+  --color-lochmara-blue: #0089d0;
+  --color-lochmara-blue--rgb: 0, 137, 208;
+  --color-solid-indigo: #844aeb;
+  --color-solid-indigo--rgb: 132, 74, 235;
+  --color-fruit-salad-green: #4caf50;
+  --color-fruit-salad-green--rgb: 76, 175, 80;
+  --color-solid-teal: #009688;
+  --color-solid-teal--rgb: 0, 150, 136;
+  --color-tundora-grey: #4a4a4a;
+  --color-tundora-grey--rgb: 74, 74, 74;
+  --color-dusty-grey: #9b9b9b;
+  --color-dusty-grey--rgb: 155, 155, 155;
+  --color-mercury-grey: #e0e0e0;
+  --color-mercury-grey--rgb: 224, 224, 224;
+  --color-gallery-grey: #eee;
+  --color-gallery-grey--rgb: 238, 238, 238;
+  --color-silver-grey: #ccc;
+  --color-silver-grey--rgb: 204, 204, 204;
+  --color-alto-grey: #ddd;
+  --color-alto-grey--rgb: 221, 221, 221;
+  --color-wild-sand-grey: #f4f4f4;
+  --color-wild-sand-grey--rgb: 244, 244, 244;
+  --color-athens-grey: #fafafb;
+  --color-athens-grey--rgb: 250, 250, 251;
+  --color-solid-grey: #444;
+  --color-solid-grey--rgb: 68, 68, 68;
+  --color-solid-black: #000;
+  --color-solid-black--rgb: 0, 0, 0;
+  --color-sienna-brown: #d9863d;
+  --color-sienna-brown--rgb: 217, 134, 61;
+  --color-text-default: #444;
+  --color-text-default--rgb: 68, 68, 68;
+  --color-text-1: #9b9b9b;
+  --color-text-1--rgb: 155, 155, 155;
+  --color-text-2: #ccc;
+  --color-text-2--rgb: 204, 204, 204;
+  --color-text-3: #fff;
+  --color-text-3--rgb: 255, 255, 255;
+  --color-text-4: #4184f3;
+  --color-text-4--rgb: 65, 132, 243;
+  --color-text-5: #ff5722;
+  --color-text-5--rgb: 255, 87, 34;
+  --color-text-6: #000;
+  --color-text-6--rgb: 0, 0, 0;
+  --color-text-7: #ff5722;
+  --color-text-7--rgb: 255, 87, 34;
+  --color-text-8: #4caf50;
+  --color-text-8--rgb: 76, 175, 80;
+  --color-text-10: #df514c;
+  --color-text-10--rgb: 223, 81, 76;
+  --color-border-default: #eee;
+  --color-border-default--rgb: 238, 238, 238;
+  --color-border-1: #f1f1f1;
+  --color-border-1--rgb: 241, 241, 241;
+  --color-border-2: #9b9b9b;
+  --color-border-2--rgb: 155, 155, 155;
+  --color-border-3: #ccc;
+  --color-border-3--rgb: 204, 204, 204;
+  --color-border-4: #fff;
+  --color-border-4--rgb: 255, 255, 255;
+  --color-border-5: #000;
+  --color-border-5--rgb: 0, 0, 0;
+  --color-border-6: #4184f3;
+  --color-border-6--rgb: 65, 132, 243;
+  --color-border-7: #ff5722;
+  --color-border-7--rgb: 255, 87, 34;
+  --color-border-8: #ff5722;
+  --color-border-8--rgb: 255, 87, 34;
+  --color-bg-body: #f9f9f9;
+  --color-bg-body--rgb: 249, 249, 249;
+  --color-bg-default: #fff;
+  --color-bg-default--rgb: 255, 255, 255;
+  --color-bg-1: #f9f9f9;
+  --color-bg-1--rgb: 249, 249, 249;
+  --color-bg-2: #9b9b9b;
+  --color-bg-2--rgb: 155, 155, 155;
+  --color-bg-3: #444;
+  --color-bg-3--rgb: 68, 68, 68;
+  --color-bg-4: #000;
+  --color-bg-4--rgb: 0, 0, 0;
+  --color-bg-5: #4184f3;
+  --color-bg-5--rgb: 65, 132, 243;
+  --color-bg-6: #ff5722;
+  --color-bg-6--rgb: 255, 87, 34;
+  --color-bg-7: #ff5722;
+  --color-bg-7--rgb: 255, 87, 34;
+  --color-bg-8: #4caf50;
+  --color-bg-8--rgb: 76, 175, 80;
+  --color-bg-9: #e0e0e0;
+  --color-bg-9--rgb: 224, 224, 224;
   /* 
     0.25 rem = 4px
     0.50 rem = 8px
@@ -51,7 +162,7 @@
 }
 
 
-#widget-container{
+#widget-container {
   border: none;
 }
 

@@ -71,7 +71,7 @@ const ChartFragment = (props) => {
     },[chartData]);
 
     return (
-        <div className='tradingview-widget-container'>
+        <div className='tradingview-widget-container' style={{marginTop: '-1px'}}>
 
           <div id='tradingview_6628f' />      
         </div>
