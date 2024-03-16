@@ -5,10 +5,12 @@ import Navbar from './dashboard/Navbar';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useNavigate } from 'react-router-dom';
 import './Landing.css'
+import { useSelector } from 'react-redux';
 
 const Landing = () => {
 
   const navigate = useNavigate();
+  const authData = useSelector((state) => state.authData);
 
   const ColFlex = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -34,7 +36,15 @@ const Landing = () => {
 
 
   }))
-
+  
+  const handleTryNow = () => {
+    if(authData?.email != ""){
+      // Already logged in, proceed to dasbhoard
+      navigate('/dashboard')
+    }else{
+      navigate('/login')
+    }
+  }
 
   return (
     <Box>
@@ -67,7 +77,7 @@ const Landing = () => {
           }}
         >PaperTrade is a platform to practice trading with virtual money and build confidence.</Typography>
 
-        <Button variant='outlined' onClick={()=> navigate('/login')}>Try Now</Button>
+        <Button variant='outlined' onClick={handleTryNow}>Try Now</Button>
 
       </ColFlex>
 
@@ -152,7 +162,7 @@ const Landing = () => {
         <Typography align='center' variant='h5' color='blue.main'  >Ready to start your trading journey?</Typography>
         <Typography align='center' color='black.text' fontWeight={'400'} >Begin by testing your strategies and systems by taking paper trades to avoid real money losses.</Typography>
 
-        <Button variant='outlined'  onClick={()=> navigate('/login')} >Try Now</Button>
+        <Button variant='outlined'  onClick={handleTryNow} >Try Now</Button>
 
       </ColFlex >
 

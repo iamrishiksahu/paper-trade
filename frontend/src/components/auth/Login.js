@@ -18,8 +18,6 @@ const LoginComponent = () => {
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/dashboard';
 
-    console.log(from)
-
     const emailRef = useRef();
     const passRef = useRef();
 
@@ -31,6 +29,12 @@ const LoginComponent = () => {
 
     const dispatch = useDispatch();
     const authData = useSelector((state) => state.authData);
+    useEffect(() => {
+        if(authData?.email != ""){
+            navigate('/dashboard')
+        }
+
+    }, [])
 
 
     const togglePersist = (e) => {
@@ -40,12 +44,6 @@ const LoginComponent = () => {
             setPersist(false)
         }
     }
-
-
-    useEffect(() => {
-        console.log('authData: ', authData)
-    }, [authData])
-
 
     const handleLoginClick = async (e) => {
         e.preventDefault();
@@ -132,10 +130,6 @@ const LoginComponent = () => {
         })
     }
 
-
-    useEffect(() => {
-        localStorage.setItem('persist', persist);
-    }, [persist])
     return (
         <>
             <Container maxWidth="xs" sx={{

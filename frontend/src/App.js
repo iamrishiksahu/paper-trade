@@ -29,13 +29,13 @@ function App() {
           <BrowserRouter>
             <Routes>
 
-              <Route exact path='/' element={<Landing />} />
-              <Route path='/login' element={<LoginComponent />} />
               <Route path='/signup' element={<SignupCompnent />} />
               <Route path='/forgotpassword' element={<ForgotPassowrd />} />
               <Route element={<PersistLogin />}>
+              <Route exact path='/' element={<Landing />} />
+                <Route path='/login' element={<LoginComponent />} />
                 <Route element={<RequireAuth />}>
-                  <Route path='/dashboard' element={<Dashboard/>}>
+                  <Route path='/dashboard' element={<Dashboard />}>
                     <Route exact path='/dashboard/' element={<Overview />} />
                     <Route path='/dashboard/positions' element={<Positions />} />
                     <Route path='/dashboard/funds' element={<Funds />} />

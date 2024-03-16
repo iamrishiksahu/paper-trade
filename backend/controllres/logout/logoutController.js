@@ -15,7 +15,7 @@ const logoutController = async (req, res) => {
 
     if (!foundUser) {
         // clearing the cooke
-        res.clearCookie('jwt', refreshToken, { httpOnly: true, secure: true, maxAge: 24 * 60 * 60 * 1000 });
+        res.clearCookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 24 * 60 * 60 * 1000 });
         return res.sendStatus(204) // All done and no content is returned
     }
 
@@ -28,7 +28,7 @@ const logoutController = async (req, res) => {
     console.log(response)
 
     // clearing the cooke
-    res.clearCookie('jwt', refreshToken, { httpOnly: true, secure: true, maxAge: 24 * 60 * 60 * 1000 });
+    res.clearCookie('jwt', refreshToken, { httpOnly: true, secure: true,  sameSite: 'none', maxAge: 24 * 60 * 60 * 1000 });
     res.sendStatus(204) // All done and no content is returned
 
 }

@@ -21,10 +21,17 @@ export const authSlice = createSlice({
 
             return state;
 
+        },
+        clearAuth: (state, action) => {
+            state.email = ''
+            state.accessToken = ''
+            state.firstname = ''
+            state.roles = []
+            return state
         }
     }
 })
 
-export const { setAuthData } = authSlice.actions;
+export const { setAuthData, clearAuth } = authSlice.actions;
 
 export default authSlice.reducer;

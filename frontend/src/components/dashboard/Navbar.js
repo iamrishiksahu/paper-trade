@@ -81,7 +81,7 @@ function Navbar() {
                 break;
             case 'Logout':
                 await logout();
-                navigate('/login');
+                navigate('/');
                 break;
             default:
 
@@ -95,7 +95,7 @@ function Navbar() {
 
     return (
         <StyledAppBar id='navbar_main_container' elevation={0} position="fixed" >
-            <Container maxWidth="none" style={{paddingLeft: '2rem', paddingRight: '2rem'}} >
+            <Container maxWidth="none" style={{ paddingLeft: '2rem', paddingRight: '2rem' }} >
 
 
                 <Toolbar disableGutters sx={{}}>

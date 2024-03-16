@@ -1,15 +1,39 @@
 import React from 'react'
 import { Typography, Container, TextField, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { axiosInstance as axios } from '../../api/axiosConfig';
 
 const SignupCompnent = () => {
     const navigate = useNavigate();
 
 
+    const handleSignupclick = async (e) => {
+        e.preventDefault()
 
-    const handleSignupclick = (e) => {
+        const password = e.target.password.value
 
+        if(password.length < 6){
+            alert('Minimum password length is 6 characters.')
+            return
+        }
 
+        try {
+
+            const res = await axios.post('/auth/signup', {
+                firstName: e.target.first_name.value.trim(),
+                lastName: e.target.last_name.value.trim(),
+                password: password,
+                email: e.target.email.value.trim()
+            })
+
+            console.log(res)
+            alert('Account created successfully! Go to Login!')
+            // e.reset()
+            navigate('/login')
+        }catch(err) {
+            console.log(err)
+            alert('Something went wrong!')
+        }
 
     }
 
@@ -48,7 +72,7 @@ const SignupCompnent = () => {
                     Create an account
                 </Typography>
 
-                <form onSubmit={(e) => handleSignupclick(e)} >
+                <form onSubmit={handleSignupclick} >
 
                     <Box sx={{
                         marginTop: '16px',
@@ -63,6 +87,7 @@ const SignupCompnent = () => {
                             required={true}
                             id="login-firstname"
                             label="First name"
+                            name='first_name'
                         />
 
 
@@ -80,6 +105,7 @@ const SignupCompnent = () => {
                             type="name"
                             id="login-lastname"
                             label="Last name"
+                            name='last_name'
                         />
 
                     </Box>
@@ -94,7 +120,7 @@ const SignupCompnent = () => {
 
                         <TextField
 
-
+                            name='email'
                             margin="none"
                             size="small"
                             type="email"
@@ -110,7 +136,7 @@ const SignupCompnent = () => {
                     }}>
                         <TextField
                             sx={{ marginLeft: 'auto', marginRight: 'auto' }}
-
+                            name='password'
                             margin="none"
                             size="small"
                             type="password"
