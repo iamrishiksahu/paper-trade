@@ -2,8 +2,7 @@ import React, { useState, useRef } from 'react'
 import './Login.css'
 import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { Typography, Container, TextField, Box, Button, Checkbox, LinearProgress } from '@mui/material';
-import { axiosInstance as axiosp } from '../../api/axiosConfig';
-import axios from 'axios';
+import { axiosInstance as axios } from '../../api/axiosConfig';
 import useAuth from '../../hooks/useAuth';
 import { useEffect } from 'react';
 import { setAuthData } from '../../features/auth/authState';
@@ -97,7 +96,7 @@ const LoginComponent = () => {
         // });
 
 
-        axios.post('http://localhost:4000/auth/login', {
+        axios.post('/auth/login', {
             email: emailVal,
             password: passwordVal
         },
