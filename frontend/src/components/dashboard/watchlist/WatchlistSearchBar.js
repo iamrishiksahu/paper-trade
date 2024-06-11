@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 const WatchlistSearchBar = () => {
 
-    const [suggestions, setSuggestions] = useState([])
+    const [suggestions, setSuggestions] = useState(['asd','sfg'])
 
     const axios = useAxiosPrivate()
     const dispatch = useDispatch()
@@ -15,6 +15,8 @@ const WatchlistSearchBar = () => {
     const handleAutoCompleteChange = async (e) => {
 
         const selected = e.target.textContent
+
+        console.log(selected)
 
         if (selected.length == 0) return
 
@@ -68,31 +70,48 @@ const WatchlistSearchBar = () => {
 
     return (
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem', paddingY: '0.25rem' }} >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.25rem', paddingY: '0.25rem', marginRight: '1rem' }} >
 
-            <SearchIcon color='grey' sx={{ maxWidth: '1rem', paddingLeft: '0.75rem' }} />
+            {/* <SearchIcon color='grey' sx={{ maxWidth: '1rem', paddingLeft: '0.75rem' }} /> */}
             <Autocomplete
-                disablePortal
+                // disablePortal
                 id="combo-box-demo"
                 onChange={handleAutoCompleteChange}
                 options={suggestions}
                 sx={{ width: '100%' }}
 
-                renderInput={(params) => (<InputBase
+                renderInput={(params) => (<TextField
+
+                    {...params}
+                    size='small'
+                    variant='standard'
+
+                    InputProps={{
+                        startAdornment: <SearchIcon color='grey' sx={{ maxWidth: '1rem', paddingX: '0.75rem' }} />, // <== adjusted this
+                        // disableUnderline:    , // <== added this
+                        
+
+                      }}
+                      sx={{
+                        "& fieldset": { border: 'none' },
+                      }}
+
                     style={{
                         width: '100%',
+                        // height: '1rem',
+                        padding: '0.5rem',
                         border: 'none',
                         outline: 'none',
-                        padding: '0.5rem 0'
+                        border: 'none',
                     }}
-                    // onChange={(e) => {
-                    //     const value = e.target.value
-                    //     if (value.length >= 3) {
-                    //         getSuggestions(value)
-                    //     } else {
-                    //         setSuggestions([])
-                    //     }
-                    // }}
+                    onChange={(e) => {
+                        const value = e.target.value
+                        if (value.length >= 3) {
+                            getSuggestions(value)
+                        } else {
+                            setSuggestions([])
+                        }
+                    }}
 
 
                     placeholder='Search BSE stocks here eg: RELIANCE,'

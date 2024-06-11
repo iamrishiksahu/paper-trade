@@ -317,7 +317,7 @@ const Watchlist = (props) => {
 
                 <WatchlistSearchBar />
 
-                <Divider />
+                {/* <Divider /> */}
 
 
                 <Box sx={{ height: '100%' }}>
