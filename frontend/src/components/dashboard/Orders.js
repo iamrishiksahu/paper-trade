@@ -19,38 +19,6 @@ import { setOrders } from '../../features/orders/orderState';
 import { addNewPosition } from '../../features/positions/positionsState';
 
 
-
-const rows = [{
-  scriptName: 'RELIANCE',
-  qty: 123,
-  avgCost: 1435.6,
-  ltp: 1778.8,
-  transactionType: 3001
-
-},
-{
-  scriptName: 'ADANIGREEN',
-  qty: 123,
-  avgCost: 1235.6,
-  ltp: 1155.8,
-
-},
-{
-  scriptName: 'TATAPOWER',
-  qty: 123,
-  avgCost: 1435.6,
-  ltp: 1778.8,
-
-},
-{
-  scriptName: 'CHOLAFIN',
-  qty: 123,
-  avgCost: 100,
-  ltp: 94.66,
-
-}
-];
-
 const preHeadingButtons = [
   {
     title: 'Authorization',
@@ -126,6 +94,8 @@ const Orders = () => {
 
   const auth = useSelector((store) => store.authData);
   let orderData = useSelector((store) => store.ordersData);
+  // orderData = orderData.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)s);
+
   const dispatch = useDispatch();
 
   const handleClickOpen = () => {

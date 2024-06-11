@@ -5,6 +5,8 @@ const verifyJWT = (req, res, next) => {
 
     const data = req.headers.authorization || req.headers.Authorization;
 
+    console.log('aya')
+
     if (!data?.startsWith('Bearer')) {
         console.log('bearer not present');
         return res.sendStatus(401).json({ message: 'origin file: verifyJWT' }) // Unauthorized

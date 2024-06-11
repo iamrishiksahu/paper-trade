@@ -28,7 +28,6 @@ const rootRouter = (app) => {
     app.use('/user', require('./user'));
     app.use('/market', require('./market'));
 
-    
 
     // Dedicated route to perform testing
 

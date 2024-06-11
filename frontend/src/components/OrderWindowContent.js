@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
-import { Box, Container, Typography, TextField, Button, Dialog, DialogActions } from '@mui/material'
+import { Box, Container, Typography, TextField, Button, Dialog, DialogActions, stepLabelClasses, CircularProgress } from '@mui/material'
 import { useState } from 'react'
 import { styled } from '@mui/system'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { useDispatch } from 'react-redux'
 import { setOrders, addNewOrder } from '../features/orders/orderState'
-import { addNewPosition } from '../features/positions/positionsState'
+import { addNewPosition, setPositions } from '../features/positions/positionsState'
 import { toggleOrderWindowOpen } from '../features/orderWindowState'
 
 const OrderWindowContent = (props) => {
@@ -19,6 +19,7 @@ const OrderWindowContent = (props) => {
     const [orderPrice, setOrderPrice] = useState(data.ltp)
     const [orderQty, setOrderQty] = useState(1)
 
+    const [loading, setLoading] = useState(false)
 
 
     const FlexBox = styled(Box)(({ theme }) => ({
@@ -34,13 +35,11 @@ const OrderWindowContent = (props) => {
         return a;
     }
 
-    const placeOrderAction = async () => {
-
-
-        let b;
+    const placeOrderAction = async (e) => {
+        setLoading(true)
 
         try {
-            b = await axios.post('/user/orders', {
+            const b = await axios.post('/user/orders', {
                 payload: {
                     scriptName: data.scriptName,
                     qty: data.transactionType == 'BUY' ? orderQty : -orderQty,
@@ -52,10 +51,16 @@ const OrderWindowContent = (props) => {
 
             })
 
+
+
             if (b.status === 201) {
-                dispatch(addNewOrder(b.data.data.orders[b.data.data.orders.length - 1]));
-                window.location.reload()
-                dispatch(toggleOrderWindowOpen)
+                dispatch(addNewOrder(b.data.data.orderAcc.orders[b.data.data.orderAcc.orders.length - 1]));
+                console.log('d')
+                dispatch(setPositions(b.data.data.positionsAcc.positions));
+
+                dispatch(toggleOrderWindowOpen())
+
+                alert('Order executed successfully!')
                 // dispatch(addNewPosition(b.data.data.orders[b.data.data.orders.length - 1]));
             } else {
                 console.log("orderCreation: ", b);
@@ -69,6 +74,8 @@ const OrderWindowContent = (props) => {
 
                 console.error(err);
             }
+        }finally{
+            setLoading(false)
         }
     }
 
@@ -132,8 +139,17 @@ const OrderWindowContent = (props) => {
                     <Typography variant='span' sx={{ color: 'blue.main' }}>₹{Math.round((orderQty * orderPrice) * 100) / 100}</Typography>
                 </Box>
 
-                <Button onClick={placeOrderAction} variant='contained' size='small' sx={{ height: '2rem', backgroundColor: colorTheme }}>{data.transactionType}</Button>
+                <Button onClick={(e) => {
+                    placeOrderAction(e)
+                }} variant='contained'
+                disabled={loading}
 
+                 size='small' sx={{ height: '2rem', backgroundColor: colorTheme }}>
+                    
+                    {loading? <CircularProgress size={'14px'} /> : data.transactionType}
+                    
+                    </Button>
+ 
             </FlexBox>
         </Container>
     )

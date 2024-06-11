@@ -31,6 +31,7 @@ const createNewOrder = async (req, res) => {
     const email = req.email;
     const data = req.body.payload;
 
+
     if (!email) {
         return res.status(401).json({ message: 'UNAUTHORIZED', msg: 'email not present in the request' });
     }
@@ -107,9 +108,12 @@ const createNewOrder = async (req, res) => {
 
     fundsAccount.fundsInfo.available_funds -= requiredMargin
 
+    let updatedFundsAccount = {}
+    let updatedPositionsAccount = {}
+
     try {
-        await fundsAccount.save();
-        await positionAccount.save();
+        updatedFundsAccount = await fundsAccount.save();
+        updatedPositionsAccount = await positionAccount.save();
 
         orderAccount.orders.push({ ...newOrder, orderStatus: 'COMPLETED' })
 
@@ -117,14 +121,9 @@ const createNewOrder = async (req, res) => {
         console.error(err)
     }
 
-
-
     const updatedOrderAccount = await orderAccount.save();
 
-    res.status(201).json({ message: 'ORDER_CREATED', data: updatedOrderAccount })
-
-
-
+    res.status(201).json({ message: 'ORDER_CREATED', data: {orderAcc: updatedOrderAccount, fundsAcc: updatedFundsAccount, positionsAcc: updatedPositionsAccount} })
 
 
 }

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     open: false,
     transactionType: '',
-    ltp : 0,
+    ltp: 0,
     exchange: '',
     scriptName: ''
 }
@@ -14,9 +14,10 @@ export const orderWindowSlice = createSlice({
     reducers: {
         toggleOrderWindowOpen: (state, action) => {
 
+            // console.log(state.open)
             state.open = !state.open;
 
-            if(action.payload){
+            if (action.payload) {
 
                 state.transactionType = action.payload?.transactionType
                 state.scriptName = action.payload?.scriptName
@@ -25,12 +26,12 @@ export const orderWindowSlice = createSlice({
 
                 return state;
             }
-            
+
             return state;
 
         }
     }
 })
 
-export const {toggleOrderWindowOpen} = orderWindowSlice.actions;
+export const { toggleOrderWindowOpen } = orderWindowSlice.actions;
 export default orderWindowSlice.reducer;

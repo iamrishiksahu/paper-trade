@@ -307,8 +307,6 @@ const Watchlist = (props) => {
             dispatch(addNewWatchListItem(payload));
         }
 
-        console.log(data);
-
 
     }
 

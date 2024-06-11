@@ -32,7 +32,7 @@ const SignupCompnent = () => {
             navigate('/login')
         }catch(err) {
             console.log(err)
-            alert('Something went wrong! Please try again')
+            alert('Something went wrong! Please try again`')
         }
 
     }

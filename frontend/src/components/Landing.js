@@ -171,7 +171,7 @@ const Landing = () => {
 
       <RowFlex sx={{
         justifyContent: 'space-between',
-        paddingX: '12rem',
+        paddingX: {sx: '3rem 1rem', md: '3rem 12rem'},
         paddingY: '3rem',
         backgroundColor: '#e6e6e6',
         flexWrap: 'wrap',
