@@ -39,8 +39,10 @@ const LoginComponent = () => {
 
     const togglePersist = (e) => {
         if(e.target.checked){
+            localStorage.setItem("persist", true)
             setPersist(true);
         }else{
+            localStorage.setItem("persist", false)
             setPersist(false)
         }
     }

@@ -10,11 +10,11 @@ const Constants = require("../../models/Constants");
 const registrationController = async (req, res) => {
 
     // destructuring the request
-    const { email, password, roles, firstname, lastname } = req.body;
+    const { email, password, roles, firstName, lastName } = req.body;
 
     // check for properly formatted request
 
-    if (!email || !password || !firstname) {
+    if (!email || !password || !firstName) {
         return res.status(400).json({
             message: "Email, Password and First Name are required!"
         })
@@ -73,9 +73,6 @@ const registrationController = async (req, res) => {
 
     const accNo = constantsProvider[0].latest_account_number + 1;
 
-
-
-
     try{
 
         const createdUser = await User.create({
@@ -84,8 +81,8 @@ const registrationController = async (req, res) => {
             accountNumbers: [accNo],
             password: hashedPassword,
             roles: roles,
-            firstname: firstname,
-            lastname: lastname,
+            firstname: firstName,
+            lastname: lastName,
         })
  
         const fundsAccount = await Funds.create({

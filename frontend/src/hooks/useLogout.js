@@ -14,7 +14,7 @@ const useLogout = () => {
                 withCredentials: true,
             })
 
-            dispatch(clearAuth) 
+            dispatch(clearAuth()) 
 
             console.log(response);
         

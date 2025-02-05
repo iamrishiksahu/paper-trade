@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import { Typography, Divider, IconButton, Button, Box } from '@mui/material'
+import { Typography, IconButton, Box } from '@mui/material'
 import { AddBoxOutlined, IndeterminateCheckBoxOutlined, InsertChart, DeleteTwoTone } from '@mui/icons-material'
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 
 import { scriptChange } from '../../../features/overview/chartFeatures'
 import { toggleOrderWindowOpen } from '../../../features/orderWindowState'
 import { useNavigate } from 'react-router-dom'
-import { host_url } from '../../../app/constants'
-import PopupToolbar from './PopupToolbar'
 
 const HoverToolbar = (props) => {
 
@@ -30,7 +27,7 @@ const HoverToolbar = (props) => {
                 dispatch(toggleOrderWindowOpen({ transactionType: 'SELL', scriptName: props.item.scriptName, ltp: props.item.ltp, exchange: props.item.exchange }))
                 break;
             case 'CHART':
-                if ((host_url + 'dashboard') != window.location.href) {
+                if ('dashboard' !== window.location.pathname) {
                     navigate('/dashboard')
                 }
                 dispatch(scriptChange({ symbol: props.item.scriptName, exchange: 'BSE' }))

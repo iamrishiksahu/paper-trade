@@ -1,31 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import {host_url} from '../../app/constants'
 
 let tvScriptLoadingPromise;
-
-
-
 const ChartFragment = (props) => {
 
     const chartData = useSelector((state) => state.chartData);
     
     const check = () => {
-        const a = document.getElementsByClassName('.valueValue-G1_Pfvwd');
+        // const a = document.getElementsByClassName('.valueValue-G1_Pfvwd');
     }
 
     const onLoadScriptRef = useRef();
 
-    const navigate = useNavigate();
 
     useEffect(() => {
-
-
-
-        
-       
-
 
         onLoadScriptRef.current = createWidget;
 

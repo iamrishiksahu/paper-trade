@@ -16,7 +16,7 @@ const Landing = () => {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center', 
     gap: '1rem',
 
     [theme.breakpoints.down("sm")]: {
@@ -38,6 +38,7 @@ const Landing = () => {
   }))
   
   const handleTryNow = () => {
+    console.log(authData)
     if(authData?.email != ""){
       // Already logged in, proceed to dasbhoard
       navigate('/dashboard')

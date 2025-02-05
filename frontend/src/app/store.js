@@ -17,6 +17,7 @@ const store = configureStore({
         watchListData: watchListReducer,
         
     },
+    devTools: true
     
 })
 
