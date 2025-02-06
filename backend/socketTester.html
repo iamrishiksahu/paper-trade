@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io Test</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script> <!-- Include Socket.io client -->
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #messages { margin-top: 20px; }
+        .msg { background: #f4f4f4; padding: 10px; margin: 5px; border-radius: 5px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <h1>Socket.io Connection Test</h1>
+    <p>Status: <span id="status">Connecting...</span></p>
+
+    <input type="text" id="messageInput" placeholder="Type a message" />
+    <button onclick="sendMessage()">Send</button>
+
+    <div id="messages"></div>
+
+    <script>
+        // Connect to the backend Socket.io server
+        const socket = io.connect('http://localhost:4000/',{path: "socket"} );  // Change the URL if needed
+
+        // Connection successful
+        socket.on('connect', () => {
+            document.getElementById('status').innerText = "Connected ✅";
+            console.log("Connected to Socket.io server");
+        });
+
+        // Connection error
+        socket.on('connect_error', (err) => {
+            document.getElementById('status').innerText = "Connection Failed ❌";
+            console.error("Connection Error:", err);
+        });
+
+        // Listen for incoming messages
+        socket.on('message', (data) => {
+            console.log("Message received:", data);
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('msg');
+            msgDiv.innerText = data;
+            document.getElementById('messages').appendChild(msgDiv);
+        });
+
+        // Send message function
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value;
+            if (message.trim() !== '') {
+                socket.emit('message', message);  // Send message to server
+                input.value = ''; // Clear input field
+            }
+        }
+    </script>
+
+</body>
+</html>
