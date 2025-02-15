@@ -5,10 +5,11 @@ let io;
 
 const setupSocket = (server) => {
     io = new Server(server, {
-        cors: corsOption,
+        path: "/main",
+        cors: {origin: "*"},
     });
 
-    const chatNamespace = io.of('/socket'); // Different endpoint
+    const chatNamespace = io.of('/'); // Different endpoint
 
     chatNamespace.on('connection', (socket) => {
         console.log(`Socket connected: ${socket.id}`);
@@ -25,6 +26,7 @@ const setupSocket = (server) => {
             console.log(`Socket disconnected: ${socket.id}`);
         });
     });
+    
 
     return io; // Return the io instance if needed elsewhere
 };

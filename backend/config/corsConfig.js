@@ -4,7 +4,7 @@ const corsOption = {
   origin: (origin, callback) => {
 
     if(process.env.NODE_ENV == "DEVELOPMENT"){
-      callback(null, true)
+      return callback(null, true)
     }
     
     if (whitelist.indexOf(origin) !== -1 || !origin) {

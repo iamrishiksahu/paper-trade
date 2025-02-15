@@ -9,11 +9,12 @@ const rootRouter = (app) => {
     app.use('/',
 
         router.get('/', (req, res) => {
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'Welcome to paper trade'
             });
         })
 
+        
     )
 
     //Unprotected Routes

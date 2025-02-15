@@ -3,13 +3,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const emailPassLoginController = async (req, res) => {
-
+    
     const { email, password } = req.body;
-
+    
     if (!email || !password) {
+        console.log("all matched: ", email, password)
         return res.status(400).json({ message: 'Username and password are required!', email: email, pass: password });
     }
-
+    
     const foundUser = await User.findOne({ email: email }).exec();
 
     if (!foundUser) {
@@ -29,6 +30,7 @@ const emailPassLoginController = async (req, res) => {
                 message: `INCORRECT_PASSWORD`
             })
         }
+
 
 
         //match is successful, generate access + refresh tokens

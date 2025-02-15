@@ -1,12 +1,10 @@
 import React from 'react'
-import { Typography, Container, TextField, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance as axios } from '../../api/axiosConfig';
 
 const SignupCompnent = () => {
+
     const navigate = useNavigate();
-
-
     const handleSignupclick = async (e) => {
         e.preventDefault()
 
@@ -43,7 +41,7 @@ const SignupCompnent = () => {
 
 
 
-            <Container maxWidth="xs" sx={{
+            <div maxWidth="xs" style={{
                 borderRadius: '4px',
                 textAlign: 'center',
                 mt: '24px',
@@ -64,23 +62,23 @@ const SignupCompnent = () => {
                 }} src='/logo192.png' />
 
 
-                <Typography sx={{
+                <p style={{
                     fontSize: '20px',
                     marginTop: '16px',
                     marginBottom: '16px',
                 }}>
                     Create an account
-                </Typography>
+                </p>
 
                 <form onSubmit={handleSignupclick} >
 
-                    <Box sx={{
+                    <div style={{
                         marginTop: '16px',
                         marginBottom: '16px',
                     }}>
-                        <TextField
+                        <input
                             autoFocus={true}
-                            sx={{ marginLeft: 'auto', marginRight: 'auto' }}
+                            style={{ marginLeft: 'auto', marginRight: 'auto' }}
                             margin="none"
                             size="small"
                             type="name"
@@ -91,14 +89,14 @@ const SignupCompnent = () => {
                         />
 
 
-                    </Box>
+                    </div>
 
-                    <Box sx={{
+                    <div style={{
                         marginTop: '16px',
                         marginBottom: '16px',
                     }}>
-                        <TextField
-                            sx={{ marginLeft: 'auto', marginRight: 'auto', }}
+                        <input
+                            style={{ marginLeft: 'auto', marginRight: 'auto', }}
 
                             margin="none"
                             size="small"
@@ -108,17 +106,17 @@ const SignupCompnent = () => {
                             name='last_name'
                         />
 
-                    </Box>
+                    </div>
 
 
 
-                    <Box sx={{
+                    <div style={{
                         marginTop: '16px',
                         marginBottom: '16px',
                     }}>
 
 
-                        <TextField
+                        <input
 
                             name='email'
                             margin="none"
@@ -128,14 +126,14 @@ const SignupCompnent = () => {
                             id="login-email"
                             label="Email"
                         />
-                    </Box>
+                    </div>
 
-                    <Box sx={{
+                    <div style={{
                         marginTop: '16px',
                         marginBottom: '16px',
                     }}>
-                        <TextField
-                            sx={{ marginLeft: 'auto', marginRight: 'auto' }}
+                        <input
+                            style={{ marginLeft: 'auto', marginRight: 'auto' }}
                             name='password'
                             margin="none"
                             size="small"
@@ -145,10 +143,10 @@ const SignupCompnent = () => {
                             label="Password"
                         />
 
-                    </Box>
+                    </div>
 
 
-                    <Button type='submit' variant='contained' sx={{
+                    <button type='submit' variant='contained' style={{
                         backgroundColor: '#ff5727',
                         width: '224px',
                         boxShadow: '0px 0px 0px',
@@ -160,14 +158,14 @@ const SignupCompnent = () => {
                         }
                     }}>
                         Sign up
-                    </Button>
+                    </button>
 
                 </form>
 
 
-                <Typography
+                <p
                     onClick={(e) => { navigate('/login') }}
-                    sx={{
+                    style={{
                         marginBottom: '32px',
                         marginTop: '16px',
                         cursor: 'pointer',
@@ -179,9 +177,9 @@ const SignupCompnent = () => {
                     }}>
                     &lt; Back to login
 
-                </Typography>
+                </p>
 
-            </Container>
+            </div>
 
         </>
     )

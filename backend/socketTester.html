@@ -23,7 +23,7 @@
 
     <script>
         // Connect to the backend Socket.io server
-        const socket = io.connect('http://localhost:4000/',{path: "socket"} );  // Change the URL if needed
+        const socket = io.connect('http://localhost:4000/', {path: "/main"} );  // Change the URL if needed
 
         // Connection successful
         socket.on('connect', () => {

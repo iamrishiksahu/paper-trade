@@ -30,7 +30,7 @@ app.use(cors(corsOption));
 
 app.use(express.json());
 // app.use({})
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 // Middleware for cookies
 app.use(cookiePasrser())
@@ -38,14 +38,15 @@ app.use(cookiePasrser())
 //setting up all root routes
 require('./routes/root')(app);
 
-setupSocket(server);
 
 //error handler
 app.use(errorHandler);
 
 mongoose.connection.once('open', () => {
     console.log('Connected to DB');
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log(`Server is listening at port: ${PORT}`)
+        setupSocket(server);
+
     })
 })

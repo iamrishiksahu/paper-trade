@@ -17,7 +17,7 @@ const store = configureStore({
         watchListData: watchListReducer,
         
     },
-    devTools: true
+    devTools: process.env.REACT_APP_ENV == "DEVELOPMENT"
     
 })
 
